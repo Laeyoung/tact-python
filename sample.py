@@ -1,5 +1,6 @@
-import keyboard
+# import keyboard
 import time
+
 from bhaptics.haptic_player import BhapticsSDK2
 
 sdk_instance = None
@@ -21,19 +22,28 @@ def on_1_pressed():
 
 if __name__ == '__main__':
     # sdk_instance = BhapticsSDK2("yourAppId", "yourApiKey")
-    appId = "appId"
-    apiKey = "apiKey"
+    appId = "mWK8BbDgpx9LdZVR22ij"
+    apiKey = "m9ef4q9oQRXbPeJY9z4J"
     sdk_instance = BhapticsSDK2(appId, apiKey)
     try:
-        keyboard.add_hotkey('space', on_space_pressed)
-        keyboard.add_hotkey('1', on_1_pressed)
-        keyboard.add_hotkey('2', on_2_pressed)
-        print("Press space to play")
+        print("Play 'shoot_test' event")
+        time.sleep(3)
+
         while True:
-            time.sleep(1)
+            sdk_instance.play_event("shoot_test")
+            time.sleep(5)
+
+            sdk_instance.play_event("shoot_test", duration=2)
+            time.sleep(5)
+
+            sdk_instance.play_event("shoot_test", duration=2)
+            time.sleep(0.2)
+            sdk_instance.stop_all()
+            time.sleep(5)
     except KeyboardInterrupt:
         print("Stopping the client...")
         sdk_instance.stop()
     finally:
-        keyboard.remove_hotkey('space')
+        print("Finally...")
+        #keyboard.remove_hotkey('space')
     print("Client stopped.")
